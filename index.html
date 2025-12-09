@@ -27,6 +27,13 @@ body {
     padding: 25px;
 }
 
+.logo {
+    width: 180px;
+    display: block;
+    margin: 0 auto 15px auto;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.28));
+}
+
 h1 {
     text-align: center;
     margin: 5px 0 15px;
@@ -98,6 +105,10 @@ button:hover {
 <body>
 
 <div class="card">
+
+    <!-- LOGO FINAL -->
+    <img src="logo_transparent_outline.png" class="logo" alt="Logo Fresh&Fit">
+
     <h1>Calculadora</h1>
 
     <div class="section">Combos</div>
@@ -134,10 +145,8 @@ function calcular() {
         energetico.value * 350 +
         cafe.value * 450;
 
-    // ✔ aplica pontuação brasileira
     resultado.innerText = total.toLocaleString("pt-BR");
 
-    // ✔ limpa inputs
     combo_lasanha.value = 0;
     combo_crepioca.value = 0;
     combo_panqueca.value = 0;
