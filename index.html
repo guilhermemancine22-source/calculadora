@@ -1,164 +1,337 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculadora Profissional</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+  :root{
+    --green-600:#0f8a3c;
+    --green-700:#0b6e2f;
+    --muted:#64748b;
+    --card:#ffffff;
+    --bg: linear-gradient(180deg,#e8f7ea 0%, #f7fff8 100%);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,Arial,sans-serif;
+    background:var(--bg);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    color:#0b2f1a;
+  }
 
-body {
-    margin: 0;
-    background: linear-gradient(135deg, #0f8a3c, #0c6b30);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+  .wrap{
+    width:420px;
+    max-width:96%;
+    border-radius:20px;
+    background:var(--card);
+    box-shadow: 0 10px 30px rgba(10,20,10,0.08);
+    padding:22px;
+    transform-origin:center;
+    animation:cardIn .45s ease;
+    overflow:hidden;
+  }
 
-/* CARD BONITO */
-.card {
-    background: #ffffff;
-    width: 380px;
-    border-radius: 22px;
-    padding: 22px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-    animation: aparecer 0.5s ease-out;
-    border: 4px solid #0f8a3c;
-}
+  @keyframes cardIn{
+    from{opacity:0; transform: translateY(18px) scale(.99)}
+    to{opacity:1; transform:none}
+  }
 
-@keyframes aparecer {
-    from { opacity: 0; transform: scale(0.9); }
-    to   { opacity: 1; transform: scale(1); }
-}
+  .head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .title{
+    font-size:20px;
+    font-weight:700;
+    color:var(--green-700);
+    letter-spacing:0.2px;
+  }
+  .sub{
+    font-size:12px;
+    color:var(--muted);
+  }
 
-h1 {
-    text-align: center;
-    margin: 0 0 12px;
-    color: #0f8a3c;
-    font-size: 26px;
-    font-weight: 900;
-}
+  .grid{
+    margin-top:14px;
+    display:grid;
+    gap:10px;
+    grid-template-columns: 1fr 96px;
+  }
 
-/* SEÇÕES */
-.section {
-    font-weight: 700;
-    color: #0f8a3c;
-    font-size: 16px;
-    margin: 16px 0 8px;
-    border-left: 4px solid #0f8a3c;
-    padding-left: 6px;
-}
+  .section{
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section h3{
+    margin:0;
+    font-size:13px;
+    color:var(--green-700);
+    font-weight:700;
+    border-left:4px solid var(--green-600);
+    padding-left:8px;
+  }
 
-/* ITENS */
-.item {
-    display: flex;
-    justify-content: space-between;
-    margin: 6px 0;
-    font-size: 15px;
-}
+  label{
+    display:block;
+    font-size:13px;
+    color:#163b1e;
+  }
 
-/* INPUT BONITO */
-input {
-    width: 65px;
-    padding: 6px;
-    font-size: 15px;
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid #0f8a3c;
-    transition: 0.2s;
-}
+  .item {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:#fbfffb;
+    border:1px solid rgba(11,110,47,0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .item:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(8,60,30,0.06); }
 
-input:focus {
-    outline: none;
-    border-color: #0a5627;
-    box-shadow: 0 0 8px rgba(0, 128, 0, 0.4);
-}
+  .item span { font-size:14px; color:#0b2f1a; }
+  .item small { font-size:12px; color:var(--muted); display:block; margin-top:6px; }
 
-/* BOTÃO */
-button {
-    margin-top: 18px;
-    width: 100%;
-    padding: 14px;
-    background: #0f8a3c;
-    color: white;
-    border: none;
-    border-radius: 14px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.25s;
-}
+  input[type="number"]{
+    width:86px;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid rgba(11,110,47,0.12);
+    text-align:center;
+    font-size:15px;
+    background:transparent;
+    transition: box-shadow .12s ease, transform .08s ease;
+  }
+  input[type="number"]:focus{
+    outline:none;
+    box-shadow:0 6px 18px rgba(11,110,47,0.12);
+    transform: translateY(-1px);
+  }
 
-button:hover {
-    background: #0c6b30;
-    transform: scale(1.03);
-}
+  .controls{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+  }
+  .btn{
+    flex:1;
+    padding:12px 14px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary{
+    background: linear-gradient(180deg,var(--green-600),var(--green-700));
+    color:#fff;
+    box-shadow: 0 8px 22px rgba(11,110,47,0.14);
+  }
+  .btn-primary:hover{ transform: translateY(-3px); }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(11,110,47,0.12);
+    color:var(--green-700);
+    font-weight:600;
+  }
+  .result{
+    margin-top:16px;
+    background: linear-gradient(90deg, rgba(15,138,60,0.06), rgba(11,110,47,0.03));
+    padding:12px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border:1px solid rgba(11,110,47,0.06);
+  }
+  .result .label{ font-size:13px; color:var(--muted); }
+  .result .value{ font-size:20px; color:var(--green-700); font-weight:800; letter-spacing:0.6px; }
 
-.total {
-    margin-top: 16px;
-    text-align: center;
-    font-weight: bold;
-    color: #0f8a3c;
-    font-size: 20px;
-}
+  /* responsive */
+  @media (max-width:420px){
+    .grid{ grid-template-columns: 1fr 92px; gap:8px; }
+    .wrap{ padding:16px; width:95%; }
+  }
 </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Calculadora</h1>
+<div class="wrap" role="application" aria-label="Calculadora de pedidos">
+  <div class="head">
+    <div>
+      <div class="title">Calculadora</div>
+      <div class="sub">Somatório de combos e itens</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:12px;color:var(--muted)">R$ — preços fixos</div>
+    </div>
+  </div>
 
-    <div class="section">Combos</div>
-    <div class="item"><span>Lasanha ($250)</span><input id="combo_lasanha" type="number" value="0"></div>
-    <div class="item"><span>Crepioca ($220)</span><input id="combo_crepioca" type="number" value="0"></div>
-    <div class="item"><span>Panqueca ($190)</span><input id="combo_panqueca" type="number" value="0"></div>
+  <div class="section">
+    <h3>Combos</h3>
+  </div>
 
-    <div class="section">Itens</div>
-    <div class="item"><span>Lasanha ($200)</span><input id="lasanha" type="number" value="0"></div>
-    <div class="item"><span>Crepioca ($170)</span><input id="crepioca" type="number" value="0"></div>
-    <div class="item"><span>Panqueca ($140)</span><input id="panqueca" type="number" value="0"></div>
-    <div class="item"><span>Água ($50)</span><input id="agua" type="number" value="0"></div>
-    <div class="item"><span>Chocolate ($150)</span><input id="choco" type="number" value="0"></div>
-    <div class="item"><span>Energético ($350)</span><input id="energetico" type="number" value="0"></div>
-    <div class="item"><span>Café ($450)</span><input id="cafe" type="number" value="0"></div>
+  <div class="grid" aria-hidden="false">
+    <div class="item" title="Combo Lasanha — R$250">
+      <div>
+        <span>Combo Lasanha</span>
+        <small>R$250</small>
+      </div>
+      <input id="combo_lasanha" type="number" min="0" value="0" aria-label="combo lasanha quantidade">
+    </div>
 
-    <button onclick="calcular()">Somar</button>
-    <div class="total">Total: $ <span id="resultado">0</span></div>
+    <div class="item" title="Combo Crepioca — R$220">
+      <div>
+        <span>Combo Crepioca</span>
+        <small>R$220</small>
+      </div>
+      <input id="combo_crepioca" type="number" min="0" value="0" aria-label="combo crepioca quantidade">
+    </div>
+
+    <div class="item" title="Combo Panqueca — R$190">
+      <div>
+        <span>Combo Panqueca</span>
+        <small>R$190</small>
+      </div>
+      <input id="combo_panqueca" type="number" min="0" value="0" aria-label="combo panqueca quantidade">
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:18px">
+    <h3>Itens Individuais</h3>
+  </div>
+
+  <div class="grid" style="margin-top:6px">
+    <div class="item">
+      <div><span>Lasanha</span><small>R$200</small></div>
+      <input id="lasanha" type="number" min="0" value="0" aria-label="lasanha quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Crepioca</span><small>R$170</small></div>
+      <input id="crepioca" type="number" min="0" value="0" aria-label="crepioca quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Panqueca</span><small>R$140</small></div>
+      <input id="panqueca" type="number" min="0" value="0" aria-label="panqueca quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Água / Suco</span><small>R$50</small></div>
+      <input id="agua" type="number" min="0" value="0" aria-label="agua quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Chocolate / Paçoca</span><small>R$150</small></div>
+      <input id="choco" type="number" min="0" value="0" aria-label="choco quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Energético</span><small>R$350</small></div>
+      <input id="energetico" type="number" min="0" value="0" aria-label="energetico quantidade">
+    </div>
+
+    <div class="item">
+      <div><span>Café</span><small>R$450</small></div>
+      <input id="cafe" type="number" min="0" value="0" aria-label="cafe quantidade">
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-primary" id="btnCalc" aria-label="Calcular total">Somar</button>
+    <button class="btn btn-ghost" id="btnClear" aria-label="Limpar campos">Limpar</button>
+  </div>
+
+  <div class="result" role="status" aria-live="polite" style="margin-top:12px">
+    <div class="label">Total</div>
+    <div class="value" id="resultado">R$ 0,00</div>
+  </div>
 </div>
 
 <script>
-function calcular() {
-    let total =
-        combo_lasanha.value * 250 +
-        combo_crepioca.value * 220 +
-        combo_panqueca.value * 190 +
-        lasanha.value * 200 +
-        crepioca.value * 170 +
-        panqueca.value * 140 +
-        agua.value * 50 +
-        choco.value * 150 +
-        energetico.value * 350 +
-        cafe.value * 450;
+  // helper: safe number from input element (returns integer)
+  const $ = id => document.getElementById(id);
+  function toNumber(el){ 
+    const v = Number(el.value);
+    return (isNaN(v) || v < 0) ? 0 : Math.floor(v);
+  }
 
-    resultado.innerText = total;
+  function formatBRL(n){
+    return n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+  }
 
-    // limpar inputs
-    combo_lasanha.value = 0;
-    combo_crepioca.value = 0;
-    combo_panqueca.value = 0;
-    lasanha.value = 0;
-    crepioca.value = 0;
-    panqueca.value = 0;
-    agua.value = 0;
-    choco.value = 0;
-    energetico.value = 0;
-    cafe.value = 0;
-}
+  function calcular(){
+    const total =
+      toNumber($('combo_lasanha')) * 250 +
+      toNumber($('combo_crepioca')) * 220 +
+      toNumber($('combo_panqueca')) * 190 +
+      toNumber($('lasanha')) * 200 +
+      toNumber($('crepioca')) * 170 +
+      toNumber($('panqueca')) * 140 +
+      toNumber($('agua')) * 50 +
+      toNumber($('choco')) * 150 +
+      toNumber($('energetico')) * 350 +
+      toNumber($('cafe')) * 450;
+
+    $('resultado').textContent = formatBRL(total);
+
+    // animação rápida no resultado
+    $('resultado').animate([
+      { transform: 'translateY(6px)', opacity: .6 },
+      { transform: 'translateY(0)', opacity: 1 }
+    ], { duration: 320, easing: 'cubic-bezier(.2,.9,.3,1)' });
+
+    // limpa campos (volta a 0)
+    const ids = ['combo_lasanha','combo_crepioca','combo_panqueca','lasanha','crepioca','panqueca','agua','choco','energetico','cafe'];
+    ids.forEach(id => { const el = $(id); if(el) el.value = 0; });
+
+    // foco no botão Somar por acessibilidade
+    $('btnCalc').focus();
+  }
+
+  function limpar(){
+    const ids = ['combo_lasanha','combo_crepioca','combo_panqueca','lasanha','crepioca','panqueca','agua','choco','energetico','cafe'];
+    ids.forEach(id => { const el = $(id); if(el) el.value = 0; });
+    $('resultado').textContent = formatBRL(0);
+    $('combo_lasanha').focus();
+  }
+
+  // event listeners
+  $('btnCalc').addEventListener('click', calcular);
+  $('btnClear').addEventListener('click', limpar);
+
+  // Allow Enter key to calculate when focused on an input
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.addEventListener('keydown', e => {
+      if(e.key === 'Enter') { e.preventDefault(); calcular(); }
+    });
+    // prevent negative typing
+    inp.addEventListener('input', () => {
+      if(inp.value && Number(inp.value) < 0) inp.value = 0;
+    });
+  });
+
+  // small accessibility improvement: announce initial total
+  document.addEventListener('DOMContentLoaded', () => {
+    $('resultado').textContent = formatBRL(0);
+  });
 </script>
-
 </body>
 </html>
