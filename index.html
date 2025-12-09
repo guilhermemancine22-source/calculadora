@@ -5,105 +5,94 @@
 <title>Calculadora</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        font-family: "Poppins", Arial, sans-serif;
-    }
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        margin: 0;
-        background: linear-gradient(135deg, #0f8a3c, #0c6d30);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
+body {
+    margin: 0;
+    background: #0f8a3c;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .card {
-        background: #ffffff;
-        width: 390px;
-        border-radius: 20px;
-        box-shadow: 0 18px 45px rgba(0,0,0,0.35);
-        padding: 22px;
-        animation: fadeIn 0.5s ease-in-out;
-    }
+.card {
+    background: #fff;
+    width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    padding: 25px;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
+h1 {
+    text-align: center;
+    margin: 5px 0 15px;
+    color: #0f8a3c;
+    font-size: 26px;
+    font-weight: bold;
+}
 
-    h1 {
-        text-align: center;
-        margin: 10px 0 18px;
-        color: #0f8a3c;
-        font-size: 26px;
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
+.section {
+    font-weight: bold;
+    color: #0f8a3c;
+    font-size: 15px;
+    margin: 14px 0 8px;
+    border-left: 4px solid #0f8a3c;
+    padding-left: 8px;
+}
 
-    .section {
-        font-weight: bold;
-        color: #0f8a3c;
-        font-size: 17px;
-        margin: 12px 0 6px;
-        border-left: 4px solid #0f8a3c;
-        padding-left: 8px;
-    }
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 15px;
+}
 
-    .item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 8px 0;
-        font-size: 15px;
-        color: #333;
-    }
+input {
+    width: 70px;
+    padding: 7px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: .2s;
+}
 
-    input {
-        width: 70px;
-        padding: 8px;
-        font-size: 16px;
-        text-align: center;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        transition: .2s;
-    }
+input:focus {
+    border-color: #0f8a3c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(15,138,60,0.4);
+}
 
-    input:focus {
-        border-color: #0f8a3c;
-        outline: none;
-        box-shadow: 0 0 5px #0f8a3c88;
-    }
+button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    background: #0f8a3c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
 
-    button {
-        margin-top: 18px;
-        width: 100%;
-        padding: 14px;
-        background: #0f8a3c;
-        color: white;
-        border: none;
-        border-radius: 14px;
-        font-size: 17px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.25s ease;
-    }
+button:hover {
+    background: #0c6f31;
+}
 
-    button:hover {
-        background: #0c6d30;
-        transform: scale(1.03);
-    }
-
-    .total {
-        margin-top: 18px;
-        text-align: center;
-        font-weight: bold;
-        color: #0f8a3c;
-        font-size: 22px;
-    }
+.total {
+    margin-top: 18px;
+    text-align: center;
+    font-weight: bold;
+    color: #0f8a3c;
+    font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -126,6 +115,7 @@
     <div class="item"><span>Café (R$ 450)</span><input id="cafe" type="number" value="0"></div>
 
     <button onclick="calcular()">Somar</button>
+
     <div class="total">Total: R$ <span id="resultado">0</span></div>
 </div>
 
@@ -144,10 +134,20 @@ function calcular() {
         energetico.value * 350 +
         cafe.value * 450;
 
-    resultado.innerText = total;
+    // ✔ aplica pontuação brasileira
+    resultado.innerText = total.toLocaleString("pt-BR");
 
-    // Limpa depois de calcular
-    document.querySelectorAll("input").forEach(campo => campo.value = 0);
+    // ✔ limpa inputs
+    combo_lasanha.value = 0;
+    combo_crepioca.value = 0;
+    combo_panqueca.value = 0;
+    lasanha.value = 0;
+    crepioca.value = 0;
+    panqueca.value = 0;
+    agua.value = 0;
+    choco.value = 0;
+    energetico.value = 0;
+    cafe.value = 0;
 }
 </script>
 
