@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
-
+    <title>Calculadora AltaRP</title>
     <style>
         body {
-            background: #0f0f0f;
-            color: #fff;
+            background: #111;
+            color: white;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -17,23 +16,18 @@
             margin: 0;
         }
 
-        .box {
-            background: #1a1a1a;
+        .calc-box {
+            background: #1c1c1c;
             padding: 25px;
             border-radius: 12px;
-            width: 330px;
+            width: 320px;
             text-align: center;
-            box-shadow: 0 0 12px rgba(255,255,255,0.1);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
         }
 
-        .logo {
-            width: 140px;
-            margin-bottom: 10px;
-        }
-
-        input {
+        input, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 8px 0;
             border-radius: 8px;
             border: none;
@@ -44,58 +38,56 @@
             width: 100%;
             padding: 12px;
             margin-top: 12px;
-            background: #4CAF50;
             border: none;
             border-radius: 10px;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        #resultado {
-            margin-top: 15px;
-            font-size: 20px;
-            font-weight: bold;
+            background: #4CAF50;
         }
     </style>
 </head>
 <body>
 
-    <div class="box">
+    <div class="calc-box">
+        <img src="https://i.imgur.com/8p9wGkt.png" width="120" style="margin-bottom: 10px;">
+        <h2>Calculadora de Produtos</h2>
 
-        <!-- COLOQUE SUA LOGO AQUI -->
-        <img src="LOGO.png" class="logo" alt="Logo">
+        <select id="produto">
+            <option value="geladeira">Geladeira – R$1200</option>
+            <option value="tv">TV – R$800</option>
+            <option value="fogão">Fogão – R$600</option>
+        </select>
 
-        <h2>Calculadora</h2>
-
-        <input type="number" id="preco" placeholder="Preço">
         <input type="number" id="quantidade" placeholder="Quantidade">
 
         <button onclick="calcular()">Calcular</button>
 
-        <p id="resultado"></p>
-
+        <h3 id="resultado"></h3>
     </div>
 
-    <script>
-        function calcular() {
-            const preco = parseFloat(document.getElementById("preco").value);
-            const quantidade = parseFloat(document.getElementById("quantidade").value);
-            const resultado = document.getElementById("resultado");
+<script>
+    function calcular() {
+        let produto = document.getElementById("produto").value;
+        let quantidade = Number(document.getElementById("quantidade").value);
 
-            if (!preco || !quantidade) {
-                resultado.innerText = "Preencha os dois campos!";
-                return;
-            }
+        let valores = {
+            geladeira: 1200,
+            tv: 800,
+            fogão: 600
+        };
 
-            const total = preco * quantidade;
-            resultado.innerText = "Total: R$ " + total.toFixed(2);
-
-            // 🧹 LIMPA AUTOMATICAMENTE OS CAMPOS
-            document.getElementById("preco").value = "";
-            document.getElementById("quantidade").value = "";
+        if (!quantidade || quantidade <= 0) {
+            document.getElementById("resultado").innerHTML = "Digite uma quantidade válida.";
+            return;
         }
-    </script>
+
+        let total = valores[produto] * quantidade;
+
+        document.getElementById("resultado").innerHTML =
+            "Total: R$ " + total.toLocaleString("pt-BR");
+    }
+</script>
 
 </body>
 </html>
