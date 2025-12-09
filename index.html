@@ -30,4 +30,126 @@
     }
 
     @keyframes fadeIn {
-        from { opacit
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        text-align: center;
+        margin: 10px 0 18px;
+        color: #0f8a3c;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .section {
+        font-weight: bold;
+        color: #0f8a3c;
+        font-size: 17px;
+        margin: 12px 0 6px;
+        border-left: 4px solid #0f8a3c;
+        padding-left: 8px;
+    }
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 8px 0;
+        font-size: 15px;
+        color: #333;
+    }
+
+    input {
+        width: 70px;
+        padding: 8px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        transition: .2s;
+    }
+
+    input:focus {
+        border-color: #0f8a3c;
+        outline: none;
+        box-shadow: 0 0 5px #0f8a3c88;
+    }
+
+    button {
+        margin-top: 18px;
+        width: 100%;
+        padding: 14px;
+        background: #0f8a3c;
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-size: 17px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    button:hover {
+        background: #0c6d30;
+        transform: scale(1.03);
+    }
+
+    .total {
+        margin-top: 18px;
+        text-align: center;
+        font-weight: bold;
+        color: #0f8a3c;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Calculadora</h1>
+
+    <div class="section">Combos</div>
+    <div class="item"><span>Lasanha (R$ 250)</span><input id="combo_lasanha" type="number" value="0"></div>
+    <div class="item"><span>Crepioca (R$ 220)</span><input id="combo_crepioca" type="number" value="0"></div>
+    <div class="item"><span>Panqueca (R$ 190)</span><input id="combo_panqueca" type="number" value="0"></div>
+
+    <div class="section">Itens</div>
+    <div class="item"><span>Lasanha (R$ 200)</span><input id="lasanha" type="number" value="0"></div>
+    <div class="item"><span>Crepioca (R$ 170)</span><input id="crepioca" type="number" value="0"></div>
+    <div class="item"><span>Panqueca (R$ 140)</span><input id="panqueca" type="number" value="0"></div>
+    <div class="item"><span>Água (R$ 50)</span><input id="agua" type="number" value="0"></div>
+    <div class="item"><span>Chocolate (R$ 150)</span><input id="choco" type="number" value="0"></div>
+    <div class="item"><span>Energético (R$ 350)</span><input id="energetico" type="number" value="0"></div>
+    <div class="item"><span>Café (R$ 450)</span><input id="cafe" type="number" value="0"></div>
+
+    <button onclick="calcular()">Somar</button>
+    <div class="total">Total: R$ <span id="resultado">0</span></div>
+</div>
+
+<script>
+function calcular() {
+
+    let total =
+        combo_lasanha.value * 250 +
+        combo_crepioca.value * 220 +
+        combo_panqueca.value * 190 +
+        lasanha.value * 200 +
+        crepioca.value * 170 +
+        panqueca.value * 140 +
+        agua.value * 50 +
+        choco.value * 150 +
+        energetico.value * 350 +
+        cafe.value * 450;
+
+    resultado.innerText = total;
+
+    // Limpa depois de calcular
+    document.querySelectorAll("input").forEach(campo => campo.value = 0);
+}
+</script>
+
+</body>
+</html>
