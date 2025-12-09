@@ -101,7 +101,7 @@ button {
 </div>
 
 <script>
-function calcular(){
+function calcular() {
     let total =
         combo_lasanha.value * 250 +
         combo_crepioca.value * 220 +
@@ -115,6 +115,18 @@ function calcular(){
         cafe.value * 450;
 
     resultado.innerText = total;
+
+    // 🧹 LIMPAR CAMPOS DEPOIS DE CALCULAR
+    combo_lasanha.value = 0;
+    combo_crepioca.value = 0;
+    combo_panqueca.value = 0;
+    lasanha.value = 0;
+    crepioca.value = 0;
+    panqueca.value = 0;
+    agua.value = 0;
+    choco.value = 0;
+    energetico.value = 0;
+    cafe.value = 0;
 }
 </script>
 
