@@ -217,25 +217,27 @@
     </div>
 
     <script>
-        function somar() {
-            const valores = {
-                lasanhaCombo: 250,
-                crepiocaCombo: 220,
-                panquecaCombo: 190,
-                lasanha: 200,
-                crepioca: 170,
-                panqueca: 140,
-                agua: 50,
-                chocolate: 150,
-                energetico: 350,
-                cafe: 450
-            };
+    function somar() {
+        const valores = {
+            lasanhaCombo: 250,
+            crepiocaCombo: 220,
+            panquecaCombo: 190,
+            lasanha: 200,
+            crepioca: 170,
+            panqueca: 140,
+            agua: 50,
+            chocolate: 150,
+            energetico: 350,
+            cafe: 450
+        };
 
-            let total = 0;
+        let total = 0;
 
-            for (let item in valores) {
-                total += parseInt(document.getElementById(item).value || 0) * valores[item];
-            }
+        for (let item in valores) {
+            total += parseInt(document.getElementById(item).value || 0) * valores[item];
+        }
 
-            document.getElementById("resultado").innerHTML =
-                "Total: R$ " + tot
+        document.getElementById("resultado").innerHTML =
+            "Total: R$ " + total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    }
+</script>
