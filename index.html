@@ -20,7 +20,7 @@
         /* LOGO FORA DO CARD */
         .logo-container {
             margin-top: 40px;
-            margin-bottom: -30px; /* puxa o card para cima */
+            margin-bottom: -30px;
             z-index: 10;
         }
 
@@ -90,8 +90,7 @@
             font-weight: bold;
         }
 
-
-        /* 📱 RESPONSIVIDADE — SEM MUDAR O DESIGN */
+        /* 📱 RESPONSIVIDADE */
         @media (max-width: 480px) {
 
             body {
@@ -104,13 +103,12 @@
             }
 
             .logo {
-                width: 160px; /* reduz proporcionalmente sem mudar o formato */
+                width: 160px;
             }
 
             .container {
                 width: 95%;
                 padding: 20px;
-                border-radius: 18px;
             }
 
             .item span {
@@ -146,9 +144,9 @@
 
 <body>
 
-    <!-- LOGO SEM FUNDO BRANCO -->
+    <!-- LOGO SEM FUNDO -->
     <div class="logo-container">
-        <img src="logo_transparent_outline.png" class="logo">
+        <img src="logo_transparent_outline.png" class="logo" alt="Logo Fresh&Fit">
     </div>
 
     <!-- CARD -->
@@ -217,27 +215,37 @@
     </div>
 
     <script>
-    function somar() {
-        const valores = {
-            lasanhaCombo: 250,
-            crepiocaCombo: 220,
-            panquecaCombo: 190,
-            lasanha: 200,
-            crepioca: 170,
-            panqueca: 140,
-            agua: 50,
-            chocolate: 150,
-            energetico: 350,
-            cafe: 450
-        };
+        function somar() {
+            const valores = {
+                lasanhaCombo: 250,
+                crepiocaCombo: 220,
+                panquecaCombo: 190,
+                lasanha: 200,
+                crepioca: 170,
+                panqueca: 140,
+                agua: 50,
+                chocolate: 150,
+                energetico: 350,
+                cafe: 450
+            };
 
-        let total = 0;
+            let total = 0;
 
-        for (let item in valores) {
-            total += parseInt(document.getElementById(item).value || 0) * valores[item];
+            for (let item in valores) {
+                const quantidade = parseInt(document.getElementById(item).value) || 0;
+                total += quantidade * valores[item];
+            }
+
+            // Atualiza o total
+            document.getElementById("resultado").innerHTML =
+                "Total: R$ " + total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+
+            // 🔥 LIMPA TODOS OS CAMPOS APÓS SOMAR
+            for (let item in valores) {
+                document.getElementById(item).value = 0;
+            }
         }
+    </script>
 
-        document.getElementById("resultado").innerHTML =
-            "Total: R$ " + total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
-    }
-</script>
+</body>
+</html>
