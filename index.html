@@ -18,24 +18,23 @@
             width: 350px;
             background: #fff;
             margin: 40px auto;
-            padding: 0; /* REMOVEI todo padding de cima */
+            padding: 0;
             border-radius: 15px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden; /* IMPEDIR fundo branco de aparecer */
+            overflow: hidden;
         }
 
         .logo-area {
             width: 100%;
-            background: transparent; /* SEM FUNDO */
-            padding: 0; /* SEM ESPAÇO BRANCO */
+            background: transparent;
+            padding: 0;
             text-align: center;
         }
 
         .logo-area img {
-            width: 180px;  /* Ajuste fino opcional */
+            width: 180px;
             display: block;
             margin: 20px auto 10px auto;
-            background: transparent; /* GARANTE sem fundo */
         }
 
         h2 {
@@ -51,10 +50,15 @@
             color: #008d26;
         }
 
+        .content {
+            padding: 20px;
+            padding-top: 0;
+        }
+
         .item {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 6px 0;
         }
 
         input {
@@ -77,6 +81,8 @@
             text-align: center;
             margin: 15px 0 20px;
             font-weight: bold;
+            color: #008d26;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -85,15 +91,104 @@
 
     <div class="container">
 
-        <!-- ÁREA DA LOGO corrigida -->
+        <!-- LOGO -->
         <div class="logo-area">
             <img src="logo_transparent_outline.png" alt="Fresh&Fit">
         </div>
 
+        <!-- Título -->
         <h2>Calculadora</h2>
 
-        <!-- Conteúdo continua igual -->
+        <!-- Conteúdo da calculadora -->
+        <div class="content">
+
+            <!-- Combos -->
+            <div class="section-title">🥗 Combos</div>
+
+            <div class="item">
+                <span>Lasanha (R$ 250)</span>
+                <input id="combo1" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Crepioca (R$ 220)</span>
+                <input id="combo2" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Panqueca (R$ 190)</span>
+                <input id="combo3" type="number" value="0">
+            </div>
+
+            <!-- Itens -->
+            <div class="section-title">🍽️ Itens</div>
+
+            <div class="item">
+                <span>Lasanha (R$ 200)</span>
+                <input id="item1" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Crepioca (R$ 170)</span>
+                <input id="item2" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Panqueca (R$ 140)</span>
+                <input id="item3" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Água (R$ 50)</span>
+                <input id="item4" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Chocolate (R$ 150)</span>
+                <input id="item5" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Energético (R$ 350)</span>
+                <input id="item6" type="number" value="0">
+            </div>
+
+            <div class="item">
+                <span>Café (R$ 450)</span>
+                <input id="item7" type="number" value="0">
+            </div>
+
+            <!-- Botão -->
+            <button onclick="somar()">Somar</button>
+
+            <!-- Total -->
+            <div class="total" id="resultado">Total: R$ 0,00</div>
+
+        </div>
     </div>
+
+    <script>
+        function somar() {
+
+            const combos = [250, 220, 190];
+            const itens = [200, 170, 140, 50, 150, 350, 450];
+
+            let total = 0;
+
+            for (let i = 0; i < combos.length; i++) {
+                let q = document.getElementById(`combo${i + 1}`).value;
+                total += combos[i] * q;
+            }
+
+            for (let i = 0; i < itens.length; i++) {
+                let q = document.getElementById(`item${i + 1}`).value;
+                total += itens[i] * q;
+            }
+
+            document.getElementById("resultado").innerText =
+                "Total: R$ " + total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        }
+    </script>
 
 </body>
 
