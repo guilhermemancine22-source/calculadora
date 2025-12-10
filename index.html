@@ -17,7 +17,6 @@
             align-items: center;
         }
 
-        /* LOGO FORA DO CARD */
         .logo-container {
             margin-top: 40px;
             margin-bottom: -30px;
@@ -29,7 +28,6 @@
             height: auto;
         }
 
-        /* CARD PRINCIPAL */
         .container {
             background-color: #fff;
             width: 360px;
@@ -90,7 +88,6 @@
             font-weight: bold;
         }
 
-        /* 📱 RESPONSIVIDADE */
         @media (max-width: 480px) {
 
             body {
@@ -145,12 +142,10 @@
 
 <body>
 
-    <!-- LOGO -->
     <div class="logo-container">
         <img src="logo_transparent_outline.png" class="logo">
     </div>
 
-    <!-- CARD -->
     <div class="container">
 
         <h2>Calculadora</h2>
@@ -159,64 +154,54 @@
 
         <div class="item">
             <span>Lasanha de Berinjela (R$ 250)</span>
-            <input type="number" id="lasanhaCombo" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="lasanhaCombo" value="0">
         </div>
 
         <div class="item">
             <span>Crepioca (R$ 220)</span>
-            <input type="number" id="crepiocaCombo" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="crepiocaCombo" value="0">
         </div>
 
         <div class="item">
             <span>Panqueca de Banana (R$ 190)</span>
-            <input type="number" id="panquecaCombo" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="panquecaCombo" value="0">
         </div>
 
         <div class="section-title">Itens</div>
 
         <div class="item">
             <span>Lasanha de Berinjela (R$ 200)</span>
-            <input type="number" id="lasanha" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="lasanha" value="0">
         </div>
 
         <div class="item">
             <span>Crepioca (R$ 170)</span>
-            <input type="number" id="crepioca" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="crepioca" value="0">
         </div>
 
         <div class="item">
             <span>Panqueca de banana (R$ 140)</span>
-            <input type="number" id="panqueca" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="panqueca" value="0">
         </div>
 
         <div class="item">
             <span>Água e sucos (R$ 50)</span>
-            <input type="number" id="agua" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="agua" value="0">
         </div>
 
         <div class="item">
-            <span>Chocolate e Paçoca (R$ 150)</span>
-            <input type="number" id="chocolate" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <span>Chocolate (R$ 150)</span>
+            <input type="number" id="chocolate" value="0">
         </div>
 
         <div class="item">
             <span>Energético (R$ 350)</span>
-            <input type="number" id="energetico" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="energetico" value="0">
         </div>
 
         <div class="item">
             <span>Café (R$ 450)</span>
-            <input type="number" id="cafe" value="0"
-                   onclick="limparCampo(this)" onblur="restaurarZero(this)">
+            <input type="number" id="cafe" value="0">
         </div>
 
         <button class="btn" onclick="somar()">Somar</button>
@@ -226,18 +211,14 @@
     </div>
 
     <script>
-
-        /* 🔥 Remove o 0 ao clicar */
-        function limparCampo(input) {
+        function limparInputOnFocus(input) {
             if (input.value === "0") input.value = "";
         }
 
-        /* 🔥 Se ficar vazio, volta o 0 */
         function restaurarZero(input) {
             if (input.value === "") input.value = "0";
         }
 
-        /* 🔥 SOMAR */
         function somar() {
             const valores = {
                 lasanhaCombo: 250,
@@ -260,8 +241,18 @@
 
             document.getElementById("resultado").innerHTML =
                 "Total: R$ " + total.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+
+            // 🔥 Resetar tudo para 0 após somar
+            for (let item in valores) {
+                document.getElementById(item).value = "0";
+            }
         }
 
+        // Adiciona eventos aos inputs automaticamente
+        document.querySelectorAll("input[type='number']").forEach(input => {
+            input.addEventListener("focus", () => limparInputOnFocus(input));
+            input.addEventListener("blur", () => restaurarZero(input));
+        });
     </script>
 
 </body>
